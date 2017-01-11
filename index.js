@@ -33,12 +33,14 @@ module.exports = function (name, value) {
 				config.setPreference(name, prefs[name]);
 			});
 
-            self = this;
-            config.write()
+			// Write the config file
+			var self = this;
+		    config.write()
             .then(function() {
+    			// Pipe the file to the next step
                 self.push(file);
                 cb();
-            })
+            });
 		} catch (err) {
 			cb(new gutil.PluginError('gulp-cordova-preference', err.message));
 		}
